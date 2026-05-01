@@ -32,7 +32,7 @@ class TracClient:
 
     def _create_session(self) -> requests.Session:
         session = requests.Session()
-        session.auth = (self.config.username, self.config.password)
+        session.auth = HTTPDigestAuth(self.config.username, self.config.password)
         session.verify = not self.config.insecure
         return session
 
