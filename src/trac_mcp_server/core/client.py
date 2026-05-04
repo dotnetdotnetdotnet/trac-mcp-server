@@ -4,6 +4,7 @@ from typing import Any
 from xml.etree import ElementTree
 
 import requests
+from requests.auth import HTTPDigestAuth
 
 from ..config import Config
 from ..validators import validate_content, validate_page_name
