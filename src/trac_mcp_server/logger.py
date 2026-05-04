@@ -61,6 +61,9 @@ def setup_logging(
         final_log_file = log_file or os.getenv(
             "LOG_FILE", "/tmp/trac-mcp-server.log"
         )
+        log_dir = os.path.dirname(final_log_file)
+        if log_dir:
+            os.makedirs(log_dir, exist_ok=True)
         logging.basicConfig(
             level=log_level,
             format="[%(asctime)s] [%(levelname)s] %(message)s",
@@ -88,6 +91,9 @@ def setup_logging(
         handlers.append(stderr_handler)
 
         if log_file:
+            log_dir = os.path.dirname(log_file)
+            if log_dir:
+                os.makedirs(log_dir, exist_ok=True)
             file_handler = logging.FileHandler(log_file, mode="a")
             if debug_format == "json":
                 file_handler.setFormatter(
